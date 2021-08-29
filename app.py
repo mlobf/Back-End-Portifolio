@@ -1,4 +1,11 @@
 import pandas as pd
+"""
+    Back-End-Portifolio/
+    ['Region', 'BuidingId',
+    'CostCentre', 'TelcoCode', 'BuildingCurrentUse', 'Country', 
+    'LocalCurrencyName(LCY)', 'CostDate', '2010BudFXRate', 
+    'RentLCY', 'UtilitiesLCY', 'FacilityLCY', 'SuppliesLCY']
+"""
 
 
 class FacilitiesReport:

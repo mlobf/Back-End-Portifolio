@@ -1,55 +1,80 @@
 from core.models import Planilha
-from datetime import datetime, timedelta
-from django.conf import settings
-import os
-import decimal
 import pandas as pd
-import model_facilities_control as mfc
+import json
 
 
-class FacilitiesReport:
-    """
-        To Do
-        Create a description here.
-    """
+xls = Planilha.objects.last()
+xls_file = xls.file
 
-    def __init__(self, spreadsheet):
+# df = pd.read_excel(xls_file)
 
-        self.spreadsheet = spreadsheet
+df = pd.DataFrame(pd.read_excel(xls_file, header=0, index_col=False))
+df = df.to_dict("split")
+# df = df.to_dict("records")
+# df = df.to_json(orient='columns')
 
-    def read_spreadsheet(self):
-        import pandas as pd
+# df = df.to_json(orient='table')
 
-        xls_file = self.spreadsheet
-        df = pd.read_excel(xls_file)
-        df = pd.DataFrame(pd.read_excel(xls_file, header=0, index_col=False))
-        df = df.to_dict("records")
+# print(df)
 
-        return df
-
-    def print_spreadsheet(self, df):
-
-        count = 0
-        for _ in df:
-            print(
-                df[count]["Region"],
-                df[count]["BuidingId"],
-                df[count]["CostCentre"],
-                df[count]["TelcoCode"],
-                df[count]["BuildingCurrentUse"],
-                df[count]["Country"],
-                df[count]["LocalCurrencyName(LCY)"],
-                df[count]["CostDate"],
-                df[count]["2010BudFXRate"],
-                df[count]["RentLCY"],
-                df[count]["UtilitiesLCY"],
-                df[count]["FacilityLCY"],
-                df[count]["SuppliesLCY"],
-            )
-            count = count + 1
+Region = 0
+BuidingId = 1
+CostCentre = 2
+TelcoCode = 3
+BuildingCurrentUse = 4
+Country = 5
+LocalCurrencyName = 6
+CostDate = 7
+BudFXRate = 8
+RentLCY = 9
+UtilitiesLCY = 10
+FacilityLCY = 11
+SuppliesLCY = 12
 
 
-ab = FacilitiesReport(
-    spreadsheet=mfc)
-rab = ab.read_spreadsheet()
-ab.print_spreadsheet(rab)
+lista = []
+for x in df['data']:
+    print('       ------------------------     ')
+    print((x[Region]))
+    print((x[BuidingId]))
+    print((x[CostCentre]))
+    print((x[TelcoCode]))
+    print((x[BuildingCurrentUse]))
+    print((x[Country]))
+    print((x[LocalCurrencyName]))
+    print((x[CostDate]))
+    print((x[BudFXRate]))
+    print((x[RentLCY]))
+    print((x[UtilitiesLCY]))
+    print((x[FacilityLCY]))
+    print((x[SuppliesLCY]))
+
+
+# xls.data = df
+# xls.save()
+
+
+# TypeError: Object of type DataFrame is not JSON serializable
+# df_json = json.dumps(df)
+
+
+'''
+count = 0
+for _ in df:
+    print(
+        df[count]["Region"],
+        df[count]["BuidingId"],
+        df[count]["CostCentre"],
+        df[count]["TelcoCode"],
+        df[count]["BuildingCurrentUse"],
+        df[count]["Country"],
+        df[count]["LocalCurrencyName(LCY)"],
+        df[count]["CostDate"],
+        df[count]["2010BudFXRate"],
+        df[count]["RentLCY"],
+        df[count]["UtilitiesLCY"],
+        df[count]["FacilityLCY"],
+        df[count]["SuppliesLCY"],
+    )
+    count = count + 1
+'''
