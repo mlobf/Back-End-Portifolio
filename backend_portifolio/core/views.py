@@ -75,8 +75,9 @@ def add_xls(request):
             messages.add_message(
                 request, messages.SUCCESS, "Planilha created with success!"
             )
-            # return redirect(reverse("add_xls"))
-            return render(request, "planilha/planilha_list.html")
+
+            return redirect(reverse('list-all-xls'))
+            # return render(request, "planilha/planilha_list.html")
 
     else:
         form = PlanilhaForm()
