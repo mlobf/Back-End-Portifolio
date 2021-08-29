@@ -2,6 +2,9 @@
 
 
 <h1>Sheet's list'</h1>
+<label for="">New Planilha</label>
+<a href="{% url 'add-xls' %}">Input new Sheet</a>
+
 
 <table>
     <thead>
@@ -22,7 +25,7 @@
             <td>{{l.created_at}}</td>
             <td>{{l.external_key}}</td>
             <td>{{l.file}}</td>
-            <td><a href="">details {{l.id}}</a></td>
+            <td><a href="{% url 'list-details-xls' l.id %}"> Details {{l.id}}</a></td>
 
             <td>
                 <a>
