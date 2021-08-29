@@ -18,6 +18,7 @@ def list_all_xls(request):
                 "created_at": p.created,
                 "external_key": p.external_key,
                 "client_name": p.client_name,
+                "file": p.file,
                 "data": p.data,
             }
         )
@@ -27,3 +28,7 @@ def list_all_xls(request):
     print(context)
 
     return render(request, "planilha/planilha_list.html", context)
+
+
+def list_details_xls(request, id):
+    pass
