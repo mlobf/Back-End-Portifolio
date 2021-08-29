@@ -21,5 +21,5 @@ from core.views import list_all_xls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('list-all-xls/', list_all_xls, 'list-all-xls'),
+    path('list-all-xls/', list_all_xls, name='list-all-xls'),
 ]
