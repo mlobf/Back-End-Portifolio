@@ -12,11 +12,8 @@ class Planilha(models.Model):
 
     external_key = models.CharField(max_length=255, null=False, blank=False)
     client_name = models.CharField(max_length=255, null=False, blank=False)
-
     file = models.FileField(upload_to='uploads/%Y/%m/%d/')
-
-    data = models.TextField(max_length=25555, null=True, blank=True)
-
+    data = models.TextField(max_length=2555555555, null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 

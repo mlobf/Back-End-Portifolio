@@ -15,7 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from core.models import Planilha
+from core.views import list_all_xls
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('list-all-xls/', list_all_xls, 'list-all-xls'),
 ]
