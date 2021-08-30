@@ -19,10 +19,11 @@ urlpatterns = [
     path("api/delete-planilha/<int:id>",
          PlanilhaDeleteAPI.as_view(), name="api-delete-planilha"),
 
+    # Error Handling
+    path('error/', error, name='error'),
+
     # To do list:
     #   Refactor
-    #       1- Add Error Handling
-    path('error/', error, name='error'),
     #       2- Optimize and Create Classes
     #       3- Try to OOP this code as much as I can.
 
