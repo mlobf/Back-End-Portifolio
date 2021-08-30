@@ -37,4 +37,4 @@ Proximo Passo - abrindo a tela de administração do Django.
 1- Loging como super usuario no seguinte endereço:  "/admin/".
 
 IMPORTANTE - O App somente funcionara com a planilha modelo de nome "model_facilities_control.xls", fornecida em "/BackEndPortifolio/Back-End-Portifolio/".
-  O conteudo dela pode ser alterado mas os cabeçahos não.
+  O conteudo dela pode ser alterado mas o cabecalho não.
