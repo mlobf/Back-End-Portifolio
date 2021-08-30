@@ -77,7 +77,6 @@ def add_xls(request):
             )
 
             return redirect(reverse('list-all-xls'))
-            # return render(request, "planilha/planilha_list.html")
 
     else:
         form = PlanilhaForm()
@@ -111,3 +110,9 @@ def list_all_xls(request):
     print(context)
 
     return render(request, "planilha/planilha_list.html", context)
+
+
+def delete_xls(request, id):
+    xls = Planilha.objects.get(id=id)
+    xls.delete()
+    return redirect(reverse('list-all-xls'))

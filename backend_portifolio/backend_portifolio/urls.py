@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from core.views import list_all_xls, list_details_xls, add_xls
+from core.views import list_all_xls, list_details_xls, add_xls, delete_xls
 
 
 urlpatterns = [
@@ -24,10 +24,10 @@ urlpatterns = [
     path('list-details-xls/<int:id>', list_details_xls, name='list-details-xls'),
 
     path('add-xls', add_xls, name='add-xls'),
+    path('delete-xls/<int:id>', delete_xls, name='delete-xls'),
 
 
     # To do list:
-    #   Add xls urls
     #   Delete xls urls
     #   API
     #    list end point

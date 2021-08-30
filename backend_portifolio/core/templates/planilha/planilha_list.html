@@ -15,6 +15,7 @@
             <th scope="col">External Key</th>
             <th scope="col">File</th>
             <th scope="col">Details</th>
+            <th scope="col">Delete</th>
         </tr>
     </thead>
     <tbody>
@@ -26,6 +27,7 @@
             <td>{{l.external_key}}</td>
             <td>{{l.file}}</td>
             <td><a href="{% url 'list-details-xls' l.id %}"> Details {{l.id}}</a></td>
+            <td><a href="{% url 'delete-xls' l.id %}"> Delete {{l.id}}</a></td>
 
             <td>
                 <a>
