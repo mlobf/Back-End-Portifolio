@@ -107,8 +107,6 @@ def list_all_xls(request):
 
     context = {"planilha": lista, "title": 'Planilhas'}
 
-    print(context)
-
     return render(request, "planilha/planilha_list.html", context)
 
 
