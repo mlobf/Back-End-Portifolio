@@ -24,7 +24,7 @@ urlpatterns = [
 
     # To do list:
     #   Refactor
-    #       2- Optimize and Create Classes
+    #       2- Optimize and Create some Methods.
     #       3- Try to OOP this code as much as I can.
 
 
