@@ -12,8 +12,18 @@ urlpatterns = [
     path('add-xls', add_xls, name='add-xls'),
     path('delete-xls/<int:id>', delete_xls, name='delete-xls'),
 
-    # To do list:
     path("api/list_planilhas", PlanilhaListAPI.as_view(), name="api-planilha-list"),
-    path("api/list-details-xls/<int:id>", PlanilhaDetailAPI.as_view(), name="api-planilha-details"),
-    path("api/delete-planilha/<int:id>", PlanilhaDeleteAPI.as_view(), name="api-delete-planilha"),
+    path("api/list-details-xls/<int:id>",
+         PlanilhaDetailAPI.as_view(), name="api-planilha-details"),
+    path("api/delete-planilha/<int:id>",
+         PlanilhaDeleteAPI.as_view(), name="api-delete-planilha"),
+
+    # To do list:
+    #   Refactor
+    #       1- Add try except
+    #       2- Optimize and Create Classes
+    #       3- Try to OOP this code as much as I can.
+
+
+
 ]
