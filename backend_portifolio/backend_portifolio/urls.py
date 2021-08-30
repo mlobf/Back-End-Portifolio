@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.urls import path
 from api.views import PlanilhaListAPI, PlanilhaDetailAPI, PlanilhaDeleteAPI
-from core.views import list_all_xls, list_details_xls, add_xls, delete_xls
+from core.views import list_all_xls, list_details_xls, add_xls, delete_xls, error
 
 
 urlpatterns = [
@@ -12,6 +12,7 @@ urlpatterns = [
     path('add-xls', add_xls, name='add-xls'),
     path('delete-xls/<int:id>', delete_xls, name='delete-xls'),
 
+    # Api Urls
     path("api/list_planilhas", PlanilhaListAPI.as_view(), name="api-planilha-list"),
     path("api/list-details-xls/<int:id>",
          PlanilhaDetailAPI.as_view(), name="api-planilha-details"),
@@ -20,7 +21,8 @@ urlpatterns = [
 
     # To do list:
     #   Refactor
-    #       1- Add try except
+    #       1- Add Error Handling
+    path('error/', error, name='error'),
     #       2- Optimize and Create Classes
     #       3- Try to OOP this code as much as I can.
 

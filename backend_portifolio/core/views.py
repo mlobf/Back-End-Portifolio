@@ -12,49 +12,51 @@ import pandas as pd
 
 
 def list_details_xls(request, id):
+    try:
+        xls = Planilha.objects.get(id=id)
+        xls_file = xls.file
+        df = pd.DataFrame(pd.read_excel(xls_file, header=0, index_col=False))
+        df = df.to_dict("split")
 
-    xls = Planilha.objects.get(id=id)
-    xls_file = xls.file
-    df = pd.DataFrame(pd.read_excel(xls_file, header=0, index_col=False))
-    df = df.to_dict("split")
+        Region = 0
+        BuidingId = 1
+        CostCentre = 2
+        TelcoCode = 3
+        BuildingCurrentUse = 4
+        Country = 5
+        LocalCurrencyName = 6
+        CostDate = 7
+        BudFXRate = 8
+        RentLCY = 9
+        UtilitiesLCY = 10
+        FacilityLCY = 11
+        SuppliesLCY = 12
 
-    Region = 0
-    BuidingId = 1
-    CostCentre = 2
-    TelcoCode = 3
-    BuildingCurrentUse = 4
-    Country = 5
-    LocalCurrencyName = 6
-    CostDate = 7
-    BudFXRate = 8
-    RentLCY = 9
-    UtilitiesLCY = 10
-    FacilityLCY = 11
-    SuppliesLCY = 12
+        lista = []
+        for x in df['data']:
 
-    lista = []
-    for x in df['data']:
+            entry = {
+                'Region': x[Region],
+                'BuidingId': x[BuidingId],
+                'CostCentre': x[CostCentre],
+                'TelcoCode':  x[TelcoCode],
+                'BuildingCurrentUse': x[BuildingCurrentUse],
+                'Country': x[Country],
+                'LocalCurrencyName': x[LocalCurrencyName],
+                'CostDate': str(x[CostDate]),
+                'BudFXRate': x[BudFXRate],
+                'RentLCY':  x[RentLCY],
+                'UtilitiesLCY': x[UtilitiesLCY],
+                'FacilityLCY': x[FacilityLCY],
+                'SuppliesLCY': x[SuppliesLCY],
+            }
+            lista.append(entry)
 
-        entry = {
-            'Region': x[Region],
-            'BuidingId': x[BuidingId],
-            'CostCentre': x[CostCentre],
-            'TelcoCode':  x[TelcoCode],
-            'BuildingCurrentUse': x[BuildingCurrentUse],
-            'Country': x[Country],
-            'LocalCurrencyName': x[LocalCurrencyName],
-            'CostDate': str(x[CostDate]),
-            'BudFXRate': x[BudFXRate],
-            'RentLCY':  x[RentLCY],
-            'UtilitiesLCY': x[UtilitiesLCY],
-            'FacilityLCY': x[FacilityLCY],
-            'SuppliesLCY': x[SuppliesLCY],
-        }
-        lista.append(entry)
+        context = {'context': lista}
 
-    context = {'context': lista}
-
-    return render(request, "planilha/planilha_details.html", context)
+        return render(request, "planilha/planilha_details.html", context)
+    except:
+        return redirect(reverse('error'))
 
 
 def add_xls(request):
@@ -62,7 +64,7 @@ def add_xls(request):
         form = PlanilhaForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            # Add the planilha.data
+
             new_planilha = Planilha.objects.last()
             xls_file = new_planilha.file
             df = pd.read_excel(xls_file)
@@ -92,25 +94,36 @@ def add_xls(request):
 
 def list_all_xls(request):
     lista = []
-    planilhas = Planilha.objects.all()
-    for p in planilhas:
-        lista.append(
-            {
-                "id": p.pk,
-                "created_at": p.created,
-                "external_key": p.external_key,
-                "client_name": p.client_name,
-                "file": p.file,
-                "data": p.data,
-            }
-        )
+    try:
+        planilhas = Planilha.objects.all()
+        for p in planilhas:
+            lista.append(
+                {
+                    "id": p.pk,
+                    "created_at": p.created,
+                    "external_key": p.external_key,
+                    "client_name": p.client_name,
+                    "file": p.file,
+                    "data": p.data,
+                }
+            )
 
-    context = {"planilha": lista, "title": 'Planilhas'}
+        context = {"planilha": lista, "title": 'Planilhas'}
 
-    return render(request, "planilha/planilha_list.html", context)
+        return render(request, "planilha/planilha_list.html", context)
+    except:
+        # return render(request, "planilha/planilha_list.html", context)
+        return redirect(reverse('error'))
 
 
 def delete_xls(request, id):
     xls = Planilha.objects.get(id=id)
     xls.delete()
     return redirect(reverse('list-all-xls'))
+
+
+def error(request):
+    context = {
+        'error_message': "An error has happened while performing a request, please try again later."
+    }
+    return render(request, "planilha/error.html", context)
