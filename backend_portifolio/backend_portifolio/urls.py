@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path
-from api.views import PlanihaListAPI
+from api.views import PlanilhaListAPI, PlanilhaDetailAPI, PlanilhaDeleteAPI
 from core.views import list_all_xls, list_details_xls, add_xls, delete_xls
 
 
@@ -13,7 +13,7 @@ urlpatterns = [
     path('delete-xls/<int:id>', delete_xls, name='delete-xls'),
 
     # To do list:
-    #   API
-    #    list end point
-    path("api/list_planilhas", PlanihaListAPI.as_view(), name="api-planilha-list"),
+    path("api/list_planilhas", PlanilhaListAPI.as_view(), name="api-planilha-list"),
+    path("api/list-details-xls/<int:id>", PlanilhaDetailAPI.as_view(), name="api-planilha-details"),
+    path("api/delete-planilha/<int:id>", PlanilhaDeleteAPI.as_view(), name="api-delete-planilha"),
 ]
