@@ -10,6 +10,7 @@ import pandas as pd
 
 
 def list_details_xls(request, id):
+
     try:
         xls = Planilha.objects.get(id=id)
         xls_file = xls.file
@@ -51,13 +52,13 @@ def list_details_xls(request, id):
             lista.append(entry)
 
         context = {'context': lista}
-
         return render(request, "planilha/planilha_details.html", context)
     except:
         return redirect(reverse('error'))
 
 
 def add_xls(request):
+
     try:
         if request.POST:
             form = PlanilhaForm(request.POST, request.FILES)
@@ -92,9 +93,13 @@ def add_xls(request):
     except:
         return redirect(reverse('error'))
 
+# ---------------E aqui o formulario com a data  ------------------------------
+
 
 def list_all_xls(request):
+
     lista = []
+
     try:
         planilhas = Planilha.objects.all()
         for p in planilhas:
@@ -112,8 +117,11 @@ def list_all_xls(request):
         context = {"planilha": lista, "title": 'Planilhas'}
 
         return render(request, "planilha/planilha_list.html", context)
+
     except:
         return redirect(reverse('error'))
+
+# --------------------------------------------------------------
 
 
 def delete_xls(request, id):

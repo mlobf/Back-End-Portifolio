@@ -1,6 +1,32 @@
 {% block content %}
 
 
+<h1>Formulario de Filtro de Data vai aqui</h1>
+
+<form action="" method="post">
+    {% csrf_token %}
+    from:<input type="date",name="fromdate"/>
+    to:<input type="date",name="todate"/>
+    <input type="submit"value="Search"/>
+    <table>
+        <thead>
+            <tr>
+                <th scope="col">Teste Data Nome Nome do Cliente</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for l in planilha %}
+            <td>{{l.client_name}}</td>
+        </tbody>
+    </table>
+
+
+
+</form>
+
+
+
+
 <h1>Sheet's list'</h1>
 <h3>New XLS</h3>
 <label for="">New Planilha</label><br>
