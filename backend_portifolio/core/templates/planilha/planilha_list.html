@@ -3,25 +3,35 @@
 
 <h1>Formulario de Filtro de Data vai aqui</h1>
 
-<form action="" method="post">
+<form method="POST">
     {% csrf_token %}
-    from:<input type="date",name="fromdate"/>
-    to:<input type="date",name="todate"/>
+    from:<input type="date" name="fromdate"/>
+    to:<input type="date" name="todate"/>
     <input type="submit"value="Search"/>
     <table>
         <thead>
             <tr>
-                <th scope="col">Teste Data Nome Nome do Cliente</th>
+                <th scope="col">id</th>
+                <th scope="col">NomeCliente</th>
+                <th scope="col">created_at</th>
+                <th scope="col">File</th>
+                <th scope="col">external_key</th>
+                <th scope="col">Details</th>
             </tr>
         </thead>
         <tbody>
             {% for l in planilha %}
-            <td>{{l.client_name}}</td>
+            <tr>
+                <td>{{l.id}}</td>
+                <td>{{l.client_name}}</td>
+                <td>{{l.created_at}}</td>
+                <td>{{l.external_key}}</td>
+                <td><a href="{% url 'list-details-xls' l.id %}"> Details {{l.id}}</a></td>
+                <td><a href="{% url 'delete-xls' l.id %}"> Delete {{l.id}}</a></td>
+            </tr>
+            {% endfor %}
         </tbody>
     </table>
-
-
-
 </form>
 
 
