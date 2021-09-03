@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path
-from api.views import PlanilhaListAPI, PlanilhaDetailAPI, PlanilhaDeleteAPI, PlanilhaListRange
+from api.views import PlanilhaListAPI, PlanilhaDetailAPI, PlanilhaDeleteAPI, PlanilhaListDate, PlanilhaListRange
 from core.views import list_all_xls, list_details_xls, add_xls, delete_xls, error
 
 
@@ -22,9 +22,18 @@ urlpatterns = [
          PlanilhaDeleteAPI.as_view(), name="api-delete-planilha"),
     path("api/delete-planilha/<int:id>",
          PlanilhaDeleteAPI.as_view(), name="api-delete-planilha"),
+
+
+    # List all planilhas by date
+    path("api/list_planilhas_by_date", PlanilhaListDate.as_view(),
+         name="api-list-planilha-date"),
+
     # List all planilhas by range
     path("api/list_planilhas_by_range", PlanilhaListRange.as_view(),
          name="api-list-planilha-range"),
+
+
+
 
 
 

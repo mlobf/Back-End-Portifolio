@@ -52,7 +52,7 @@ class PlanilhaDeleteAPI(APIView):
             return redirect(reverse('error'))
 
 
-class PlanilhaListRange(APIView):
+class PlanilhaListDate(APIView):
 
     def get(self, request):
         # import pdb
@@ -61,6 +61,24 @@ class PlanilhaListRange(APIView):
 
         planilha = Planilha.objects.filter(created__date=date)
 
+        serializer = PlanilhaSerializer(planilha, many=True)
+
+        return Response(serializer.data)
+
+
+class PlanilhaListRange(APIView):
+
+    def get(self, request):
+        # import pdb
+        # pdb.set_trace()
+        date_beg = request.GET.get('date_beg')
+        date_end = request.GET.get('date_end')
+
+        print(date_beg)
+        print(date_end)
+
+        planilha = Planilha.objects.filter(
+            created__date__range=(date_beg, date_end))
         serializer = PlanilhaSerializer(planilha, many=True)
 
         return Response(serializer.data)
