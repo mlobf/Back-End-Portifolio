@@ -95,29 +95,15 @@ def add_xls(request):
     except:
         return redirect(reverse('error'))
 
-# ---------------E aqui o formulario com a data  ------------------------------
-
 
 def list_all_xls(request):
 
     lista = []
     if request.method == "POST":
         # pdb.set_trace()
-        print('----------------------------------------------------------------------------------------')
         fromdate = request.POST.get('fromdate')
         todate = request.POST.get('todate')
 
-        # format = "%Y-%m-%d"
-        # strftime("%Y-%m-%d") + '00:00:00',
-
-        # fromdate = fromdate.strftime("%Y-%m-%d") + '00:00:00'
-        # O formulario nao esta passando os valores via post
-        #   MOTIVO , EU USEI UMA VIRGULA DENTRO DA TAG HTML QPQP
-        #        'fromdate': ['2021-09-01'], 'todate': ['2021-09-01']
-        #         datetime.datetime(2021, 9, 2, 12, 54, 20, 34578, tzinfo=<UTC>)
-        #         .strftime("%Y-%m-%d") + '00:00:00'
-
-        # tomdate = request.POST.get('todate')
         search_result = Planilha.objects.filter(
             created__date__range=(fromdate, todate))
 
