@@ -10,14 +10,10 @@ class PlanilhaListAPI(APIView):
 
     def get(self, request):
 
-        try:
-            planilha = Planilha.objects.all()
-            serializer = PlanilhaSerializer(planilha, many=True)
+        planilha = Planilha.objects.all()
+        serializer = PlanilhaSerializer(planilha, many=True)
 
-            return Response(serializer.data)
-
-        except:
-            return redirect(reverse('error'))
+        return Response(serializer.data)
 
 
 class PlanilhaDetailAPI(APIView):
@@ -54,3 +50,17 @@ class PlanilhaDeleteAPI(APIView):
 
         except:
             return redirect(reverse('error'))
+
+
+class PlanilhaListRange(APIView):
+
+    def get(self, request):
+        # import pdb
+        # pdb.set_trace()
+        date = request.GET.get('date')
+
+        planilha = Planilha.objects.filter(created__date=date)
+
+        serializer = PlanilhaSerializer(planilha, many=True)
+
+        return Response(serializer.data)
