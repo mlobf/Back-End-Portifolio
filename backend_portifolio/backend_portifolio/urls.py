@@ -7,7 +7,9 @@ from core.views import list_all_xls, list_details_xls, add_xls, delete_xls, erro
 urlpatterns = [
 
     path('', list_all_xls, name='list-all-xls'),
+
     path('admin/', admin.site.urls),
+
     path('list-all-xls/', list_all_xls, name='list-all-xls'),
     path('list-details-xls/<int:id>', list_details_xls, name='list-details-xls'),
 
@@ -31,10 +33,6 @@ urlpatterns = [
     # List all planilhas by range
     path("api/list_planilhas_by_range", PlanilhaListRange.as_view(),
          name="api-list-planilha-range"),
-
-
-
-
 
 
     # Error Handling
